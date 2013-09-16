@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-jcb-typesystem</name>
+    <description>This is a typesystem for a simple Question Answering task.</description>
+    <version>1.0</version>
+    <vendor/>
+  <types>
+    <typeDescription>
+      <name>BaseAnnotation</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>source</name>
+          <description>The name of the annotator which created this annotation.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>confidence</name>
+          <description>The confidence of the system in this annotation.</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>Question</name>
+      <description>The span of text containing the question to be answered.</description>
+      <supertypeName>BaseAnnotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>Answer</name>
+      <description>A span of text containing an answer to the question. This also stores whether or not the answer is correct.</description>
+      <supertypeName>BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>isCorrect</name>
+          <description>Whether or not the answer is correct.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Token</name>
+      <description>A span of text containing a word token.</description>
+      <supertypeName>BaseAnnotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>NGram</name>
+      <description>A collection of adjacent Tokens.</description>
+      <supertypeName>BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokens</name>
+          <description>The tokens in the ngram.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>Token</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>AnswerScore</name>
+      <description>Records the score of an answer.</description>
+      <supertypeName>BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>score</name>
+          <description>The score of the answer.</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>answer</name>
+          <description>The answer being scored.</description>
+          <rangeTypeName>Answer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Result</name>
+      <description>This contains the ranked list of top N answers, where N is the number of correct answers. This also records the precision (the number of correct answers in the list divided by the total number of answers in the list).</description>
+      <supertypeName>BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>precision</name>
+          <description>This is the number of correct answers in the N-best list divided by N.</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>scores</name>
+          <description>This is the N-best list of answers.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>AnswerScore</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
